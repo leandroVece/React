@@ -3,33 +3,33 @@ import Table from "./Components/Table.js";
 import Form from "./Components/Form";
 
 
-const listTask = [
-  {
-    id: 0,
-    name: "Sacar la basura"
-  },
-  {
-    id: 1,
-    name: "Limpiar la casa"
-  },
-  {
-    id: 2,
-    name: "Aprender react.js"
-  },
-];
+
 
 function App() {
-  const [state, setState] = useState(listTask);
+
+  const localStorageTask = localStorage.getItem("task_V1");
   const [dataToEdit, setDataToEdit] = useState(null);
+  let parsedTask;
+
+  if (!localStorageTask) {
+    localStorage.setItem('task_V1', JSON.stringify([]));
+    parsedTask = [];
+  } else {
+    parsedTask = JSON.parse(localStorageTask);
+  }
+  const [tasks, setTasks] = useState(parsedTask);
+
 
   const CreateData = (data) => {
-    data.id = state.length;
-    setState([...state, data])
+    data.id = Date.now();
+    const lista = [...tasks, data];
+    //setTasks([...tasks, data])
+    SaveToLocalStorage(lista);
   }
 
   const updateData = (data) => {
-    let newData = state.map((el) => (el.id === data.id ? data : el));
-    setState(newData);
+    let newData = tasks.map((el) => (el.id === data.id ? data : el));;
+    SaveToLocalStorage(newData);
   };
 
   const deleteData = (id) => {
@@ -37,13 +37,18 @@ function App() {
       `¿Estás seguro de eliminar el registro con el id '${id}'?`
     );
     if (isDelete) {
-      let newData = state.filter((el) => el.id !== id);
-      setState(newData);
+      let newData = tasks.filter((el) => el.id !== id);
+      SaveToLocalStorage(newData);
     } else {
       return;
     }
   };
 
+  const SaveToLocalStorage = (data) => {
+    const stringConvert = JSON.stringify(data);
+    localStorage.setItem('task_V1', stringConvert);
+    setTasks(data)
+  };
   return (
     <Fragment>
       <Form
@@ -52,7 +57,7 @@ function App() {
         dataToEdit={dataToEdit}
         setDataToEdit={setDataToEdit} />
       <Table
-        data={state}
+        data={tasks}
         setDataToEdit={setDataToEdit}
         deleteData={deleteData} />
     </Fragment>

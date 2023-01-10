@@ -13,9 +13,9 @@ const Table = ({ data, setDataToEdit, deleteData }) => {
                 </thead>
                 <tbody>
                     {data.length > 0 ? (
-                        data.map(x => (
+                        data.map((x, index) => (
                             <TableRow
-                                key={x.id}
+                                key={index}
                                 el={x}
                                 setDataToEdit={setDataToEdit}
                                 deleteData={deleteData}

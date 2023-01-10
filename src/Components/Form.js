@@ -50,7 +50,7 @@ const Form = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
         <form className="w-50 mx-auto mt-2" onSubmit={handleSubmit}>
             <div className="row g-4 align-items-center">
                 <div className="col-auto">
-                    <label for="textImput" className="col-form-label">Tarea</label>
+                    <label htmlFor="textImput" className="col-form-label">Tarea</label>
                 </div>
                 <div className="col-auto">
                     <input type="text" maxLength={100} name="name" placeholder="Nombre de la tarea" onChange={handleChange} id="textImput" className="form-control" aria-describedby="passwordHelpInline" value={form.name} />
