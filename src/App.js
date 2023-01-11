@@ -3,33 +3,46 @@ import Table from "./Components/Table.js";
 import Form from "./Components/Form";
 
 
-
-
-function App() {
-
-  const localStorageTask = localStorage.getItem("task_V1");
-  const [dataToEdit, setDataToEdit] = useState(null);
+function useLocalStorage(item, initalValue) {
+  const localStorageTask = localStorage.getItem(item);
   let parsedTask;
 
   if (!localStorageTask) {
-    localStorage.setItem('task_V1', JSON.stringify([]));
+    localStorage.setItem(item, JSON.stringify(initalValue));
     parsedTask = [];
   } else {
     parsedTask = JSON.parse(localStorageTask);
   }
-  const [tasks, setTasks] = useState(parsedTask);
 
+  const [tasks, setTask] = useState(parsedTask);
+
+  const SaveToLocalStorage = (data) => {
+    const stringConvert = JSON.stringify(data);
+    localStorage.setItem(item, stringConvert);
+    setTask(data)
+  };
+  return [
+    tasks,
+    SaveToLocalStorage
+  ];
+}
+
+
+function App() {
+
+  const [dataToEdit, setDataToEdit] = useState(null);
+  const [tasks, saveTask] = useLocalStorage('task_V1', []);
 
   const CreateData = (data) => {
     data.id = Date.now();
     const lista = [...tasks, data];
     //setTasks([...tasks, data])
-    SaveToLocalStorage(lista);
+    saveTask(lista);
   }
 
   const updateData = (data) => {
     let newData = tasks.map((el) => (el.id === data.id ? data : el));;
-    SaveToLocalStorage(newData);
+    saveTask(newData);
   };
 
   const deleteData = (id) => {
@@ -38,17 +51,12 @@ function App() {
     );
     if (isDelete) {
       let newData = tasks.filter((el) => el.id !== id);
-      SaveToLocalStorage(newData);
+      saveTask(newData);
     } else {
       return;
     }
   };
 
-  const SaveToLocalStorage = (data) => {
-    const stringConvert = JSON.stringify(data);
-    localStorage.setItem('task_V1', stringConvert);
-    setTasks(data)
-  };
   return (
     <Fragment>
       <Form
