@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../Context/GlobalContext";
 
-const TableRow = ({ el, setDataToEdit, deleteData }) => {
+const TableRow = (el) => {
+    const { setDataToEdit, deleteData } = useContext(GlobalContext)
     let { name, id } = el;
 
     return (

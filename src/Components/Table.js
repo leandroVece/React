@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../Context/GlobalContext.js";
 import TableRow from "./TableRow.js";
 
-const Table = ({ data, setDataToEdit, deleteData }) => {
+const Table = () => {
+    const { DataTask } = useContext(GlobalContext)
+    console.log(DataTask)
     return (
         <div className="w-50 mx-auto">
             <table className="table">
@@ -12,13 +15,11 @@ const Table = ({ data, setDataToEdit, deleteData }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.length > 0 ? (
-                        data.map((x, index) => (
+                    {DataTask.length > 0 ? (
+                        DataTask.map((x, index) => (
                             <TableRow
                                 key={index}
                                 el={x}
-                                setDataToEdit={setDataToEdit}
-                                deleteData={deleteData}
                             />
                         ))) : (
                         <tr>

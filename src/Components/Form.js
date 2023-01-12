@@ -1,49 +1,70 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GlobalContext } from "../Context/GlobalContext";
 
 const initialForm = {
     name: "",
     id: null,
 }
 
-const Form = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
+const Form = () => {
 
+    const { updateData, createData, dataToEdit, setDataToEdit } = useContext(GlobalContext);
     const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
-        if (dataToEdit) {
-            setForm(dataToEdit);
-        } else {
-            setForm(initialForm);
+        try {
+            if (dataToEdit) {
+                setForm(dataToEdit);
+            } else {
+                setForm(initialForm);
+            }
+        } catch (error) {
+            this.setState({ error });
         }
     }, [dataToEdit]);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        try {
 
-        if (!form.name) {
-            alert("Datos incompletos");
-            return;
+            e.preventDefault();
+
+            if (!form.name) {
+                alert("Datos incompletos");
+                return;
+            }
+
+            if (form.id === null) {
+                createData(form);
+            } else {
+                updateData(form);
+            }
+
+            handleReset();
+        } catch (error) {
+            this.setState({ error });
         }
-
-        if (form.id === null) {
-            createData(form);
-        } else {
-            updateData(form);
-        }
-
-        handleReset();
     };
 
     const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
+        try {
+            // Do something that could throw
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value,
+            });
+        } catch (error) {
+            this.setState({ error });
+        }
     };
 
     const handleReset = (e) => {
-        setForm(initialForm);
-        setDataToEdit(null);
+        try {
+            // Do something that could throw
+            setForm(initialForm);
+            setDataToEdit(null);
+        } catch (error) {
+            this.setState({ error });
+        }
     };
 
     return (

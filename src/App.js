@@ -1,36 +1,10 @@
-import React, { Fragment, useState } from "react";
-import Table from "./Components/Table.js";
-import Form from "./Components/Form";
-
-
-function useLocalStorage(item, initalValue) {
-  const localStorageTask = localStorage.getItem(item);
-  let parsedTask;
-
-  if (!localStorageTask) {
-    localStorage.setItem(item, JSON.stringify(initalValue));
-    parsedTask = [];
-  } else {
-    parsedTask = JSON.parse(localStorageTask);
-  }
-
-  const [tasks, setTask] = useState(parsedTask);
-
-  const SaveToLocalStorage = (data) => {
-    const stringConvert = JSON.stringify(data);
-    localStorage.setItem(item, stringConvert);
-    setTask(data)
-  };
-  return [
-    tasks,
-    SaveToLocalStorage
-  ];
-}
-
+import React from "react";
+import { ContextProvider } from "./Context/GlobalContext";
+import AppIU from "./Components/AppIU";
 
 function App() {
 
-  const [dataToEdit, setDataToEdit] = useState(null);
+  /*const [dataToEdit, setDataToEdit] = useState(null);
   const [tasks, saveTask] = useLocalStorage('task_V1', []);
 
   const CreateData = (data) => {
@@ -55,20 +29,12 @@ function App() {
     } else {
       return;
     }
-  };
+  };*/
 
   return (
-    <Fragment>
-      <Form
-        createData={CreateData}
-        updateData={updateData}
-        dataToEdit={dataToEdit}
-        setDataToEdit={setDataToEdit} />
-      <Table
-        data={tasks}
-        setDataToEdit={setDataToEdit}
-        deleteData={deleteData} />
-    </Fragment>
+    <ContextProvider>
+      <AppIU />
+    </ContextProvider>
   );
 }
 
