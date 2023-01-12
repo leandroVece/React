@@ -11,7 +11,7 @@ function useLocalStorage(item, initalValue) {
         parsedTask = JSON.parse(localStorageTask);
     }
 
-    const [tasks, setTask] = useState(parsedTask);
+    const [DataTask, setTask] = useState(parsedTask);
 
     const SaveToLocalStorage = (data) => {
         const stringConvert = JSON.stringify(data);
@@ -19,7 +19,7 @@ function useLocalStorage(item, initalValue) {
         setTask(data)
     };
     return {
-        tasks,
+        DataTask,
         SaveToLocalStorage
     };
 }

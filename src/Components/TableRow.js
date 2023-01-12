@@ -4,7 +4,7 @@ import { GlobalContext } from "../Context/GlobalContext";
 const TableRow = (el) => {
     const { setDataToEdit, deleteData } = useContext(GlobalContext)
     let { name, id } = el;
-
+    console.log(el)
     return (
         <tr>
             <td>{name}</td>

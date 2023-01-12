@@ -4,7 +4,7 @@ import TableRow from "./TableRow.js";
 
 const Table = () => {
     const { DataTask } = useContext(GlobalContext)
-    console.log(DataTask)
+
     return (
         <div className="w-50 mx-auto">
             <table className="table">
@@ -21,6 +21,7 @@ const Table = () => {
                                 key={index}
                                 el={x}
                             />
+                            // console.log(x);
                         ))) : (
                         <tr>
                             <td colSpan="2">Sin datos</td>
