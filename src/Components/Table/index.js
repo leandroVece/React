@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../Context/GlobalContext.js";
-import TableRow from "./TableRow.js";
+import { GlobalContext } from "../../Context/GlobalContext.js";
+import TableRow from "../TableRow/index.js";
 
 const Table = () => {
     const { DataTask } = useContext(GlobalContext)

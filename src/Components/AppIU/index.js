@@ -1,7 +1,8 @@
 import React from "react";
-import Table from "./Table";
-import Form from "./Form";
-import { GlobalContext } from "../Context/GlobalContext";
+import Table from "../Table";
+import Form from "../Form";
+import { GlobalContext } from "../../Context/GlobalContext";
+import Modal from "../Modal";
 
 
 function AppIU() {
@@ -15,7 +16,6 @@ function AppIU() {
         DataTask,
     } = React.useContext(GlobalContext)
 
-    console.log(dataToEdit)
 
     return (
 
@@ -31,6 +31,7 @@ function AppIU() {
         // </div>
 
         <div>
+            <Modal />
             <Form
                 updateData={updateData}
                 createData={createData}

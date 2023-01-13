@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../Context/GlobalContext";
+import { GlobalContext } from "../../Context/GlobalContext";
 
 const TableRow = (el) => {
     const { setDataToEdit, deleteData } = useContext(GlobalContext)
     const obj = Object.values(el);
     let { name, id } = obj[0];
-    console.log(obj[0]);
     return (
         <tr>
             <td>{name}</td>
