@@ -13,14 +13,14 @@ function useLocalStorage(item, initalValue) {
 
     const [DataTask, setTask] = useState(parsedTask);
 
-    const SaveToLocalStorage = (data) => {
+    const SaveDataTask = (data) => {
         const stringConvert = JSON.stringify(data);
         localStorage.setItem(item, stringConvert);
         setTask(data)
     };
     return {
         DataTask,
-        SaveToLocalStorage
+        SaveDataTask
     };
 }
 

@@ -15,6 +15,8 @@ function AppIU() {
         DataTask,
     } = React.useContext(GlobalContext)
 
+    console.log(dataToEdit)
+
     return (
 
         // <div>

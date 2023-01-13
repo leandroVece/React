@@ -8,63 +8,47 @@ const initialForm = {
 
 const Form = () => {
 
-    const { updateData, createData, dataToEdit, setDataToEdit } = useContext(GlobalContext);
+    const { updateData, createData, DataToEdit, setDataToEdit } = useContext(GlobalContext);
+
     const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
-        try {
-            if (dataToEdit) {
-                setForm(dataToEdit);
-            } else {
-                setForm(initialForm);
-            }
-        } catch (error) {
-            this.setState({ error });
+        if (DataToEdit) {
+            setForm(DataToEdit);
+        } else {
+            setForm(initialForm);
         }
-    }, [dataToEdit]);
+    }, [DataToEdit]);
 
     const handleSubmit = (e) => {
-        try {
+        e.preventDefault();
 
-            e.preventDefault();
-
-            if (!form.name) {
-                alert("Datos incompletos");
-                return;
-            }
-
-            if (form.id === null) {
-                createData(form);
-            } else {
-                updateData(form);
-            }
-
-            handleReset();
-        } catch (error) {
-            this.setState({ error });
+        if (!form.name) {
+            alert("Datos incompletos");
+            return;
         }
+
+        if (form.id === null) {
+            createData(form);
+        } else {
+            updateData(form);
+        }
+
+        handleReset();
     };
 
     const handleChange = (e) => {
-        try {
-            // Do something that could throw
-            setForm({
-                ...form,
-                [e.target.name]: e.target.value,
-            });
-        } catch (error) {
-            this.setState({ error });
-        }
+
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
     };
 
     const handleReset = (e) => {
-        try {
-            // Do something that could throw
-            setForm(initialForm);
-            setDataToEdit(null);
-        } catch (error) {
-            this.setState({ error });
-        }
+
+        setForm(initialForm);
+        setDataToEdit(null);
     };
 
     return (

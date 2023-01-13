@@ -14,7 +14,6 @@ const ContextProvider = (props) => {
     const createData = (data) => {
         data.id = Date.now();
         const lista = [...DataTask, data];
-        //setTasks([...tasks, data])
         SaveDataTask(lista);
     }
 

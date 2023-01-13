@@ -21,7 +21,6 @@ const Table = () => {
                                 key={index}
                                 el={x}
                             />
-                            // console.log(x);
                         ))) : (
                         <tr>
                             <td colSpan="2">Sin datos</td>
