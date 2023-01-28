@@ -599,7 +599,9 @@ Con estos pequeños cambios conseguimos mejorar no solo visualmente nuestro cód
 Hasta ahora todo ha marchado bien, nuestro sitio web trabaja correctamente y no parece haber errores. Sin embargo, eso se debe a su simplicidad.
 Como habrás notado, cada vez que necesitamos enviar el valor o capturar un valor es necesario enviar una variable o función a lo largo de todos nuestros archivos. Tal es el caso de “setDataToEdit”.
 A este componente se lo enviamos en nuestro archivo app, a nuestro archivo Table que a su vez lo envía a nuestro archivo TableRow para capturar un valor cuando apretamos el botón de editar.
-App     :fa-arrow-right:    Table 	   :fa-arrow-right:    TAbleRow
+
+App     =>    Table  =>    TAbleRow
+
 A su vez este es enviado a Form donde. Si nuestra aplicación fuera mas grande y los archivos estuvieran contenido en otros archivos padres, este envio de informacion no solo seria pesado sino tambien tedioso.
 Para solucionarlo podemos utilizar el arbol de componentes o context. ¿Qué es Context en React? Context es una forma de comunicación del árbol de componentes en React, ya que, nos evita pasar propiedades (props) de forma manual por cada nivel de componentes que tenga nuestro árbol.
 Para esto tenemos un proveedor que envolverá a todos los componentes que serán los consumidores de nuestro contexto.
@@ -666,8 +668,8 @@ Siguiendo el tema. Vemos que aquí he llevado las funciones relacionadas a nuest
 Las funciones que voy a exportar son dos ContextProvider y el GloalContex. Luego cree un nuevo archivo porque no es posible llamar GlobanContext en el mismo archivo que el ContextProvide.
 Los niveles quedaron de esta manera
 
-  App           :fa-arrow-right:      AppIU    :fa-arrow-right:      Table 	 :fa-arrow-right:      TAbleRow
- App          :fa-arrow-right:       AppIU    :fa-arrow-right:      Form
+  App           =>      AppIU    =>      Table 	=>     TAbleRow
+ App          =>     AppIU    =>     Form
 
 Representemos estos cambios también en los archivos.
 **App.js**
